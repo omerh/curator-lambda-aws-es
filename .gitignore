@@ -1,0 +1,12 @@
+# Idea
+.idea
+.vscode
+
+# python
+venv
+
+# artifact
+*.zip
+
+# tmp package dir
+package

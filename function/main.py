@@ -35,6 +35,12 @@ def lambda_handler(event, context):
                              unit_count=int(os.environ.get('DAYS')))
 
     if index_list.indices:
+        print(index_list.indices)
         curator.DeleteIndices(index_list).do_action()
 
+
+if __name__ == "__main__":
+    event = ''
+    context = []
+    lambda_handler(event, context)
 

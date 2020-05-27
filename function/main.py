@@ -26,14 +26,19 @@ def lambda_handler(event, context):
         connection_class=RequestsHttpConnection
     )
 
+    # get all index from es cluster
     index_list = curator.IndexList(es)
-
+    
+    # filter kibana
+    index_list.filter_kibana()
+    # filter by age
     index_list.filter_by_age(source='name',
                              direction='older',
                              timestring='%Y.%m.%d',
                              unit='days',
                              unit_count=int(os.environ.get('DAYS')))
 
+    # delete all old index
     if index_list.indices:
         print(index_list.indices)
         curator.DeleteIndices(index_list).do_action()
